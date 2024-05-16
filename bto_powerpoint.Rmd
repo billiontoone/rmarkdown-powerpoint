@@ -1,0 +1,137 @@
+---
+title: "A conclusive title statement: An instructional guide for generating powerpoint files from Rmarkdown files for enabling productive scientific communication at BillionToOne"
+author: David Tsao
+date: "May 16, 2024"
+footer: "BillionToOne, Inc."
+output:
+  powerpoint_presentation:
+    reference_doc: ./bto_template/BTO-template.potx
+---
+
+```{r echo=F}
+# Setup chunk options. echo = False prevents R code from being printed
+knitr::opts_chunk$set(echo = FALSE, message = F, warning = F)
+knitr::opts_chunk$set(fig.width=8, fig.height=4)
+
+```
+
+```{r}
+# import packages
+suppressPackageStartupMessages({library(tidyverse)})
+```
+
+# Introduction & Motivation
+
+## Science is generating new knowledge and telling people about it
+
+- If a tree falls in a forest and no one is around to hear it, does it make a sound?
+- Does art have any value if no one is around to view it?
+- Do your scientific results have any worth if no one understands it?
+
+## Claim: Generating powerpoint slides directly from RMarkdown can increase scientific communication
+
+The technical report format is great for communicating scientific results. However, the "scientific" talk is also an important scientific communication method.
+
+For external talks, the level of polish and background setting needs to be very high. It can take 10+ hours to create a new talk for external audiences from scratch.
+
+Internal talks (e.g. group meeting) are more informal, and the audience has much more context. 
+
+Herein, I show how to use Rmarkdown to efficiently create scientific talks for internal purposes. 
+
+# Methods
+
+
+## Rmarkdown to powerpoint pipeline
+
+A modified "build" pipeline was used to generate Powerpoint presentations using Rmarkdown / Rstudio IDE / pandoc.
+The pipeline was adapted from the posit solutions engineering [powerpoint vignette](https://github.com/sol-eng/powerpoint). 
+
+Briefly, a custom powerpoint template was created, BTO-template.potx, that has BillionToOne brand colors and logos. Additionally, presentation guidelines were followed from https://www.arl.org/accessibility-guidelines-for-powerpoint-presentations/, such as minimum 24pt font size.
+
+As a proof of concept, this presentation was created using the template and Rmarkdown. Examples were included for sections, bullets, plotting, and tables.
+
+# Results
+
+## Text formatting can be efficiently applied using markdown syntax
+
+:::::::::::::: {.columns}
+::: {.column}
+```
+*italic* 
+**bold** 
+~~strikeout~~ 
+~subscript~
+^superscript^
+[small caps]{.smallcaps} 
+`verbatim`
+```
+:::
+::: {.column}
+*italic* 
+
+**bold** 
+
+~~strikeout~~ 
+
+~sub~script
+
+^super^script
+
+[small caps]{.smallcaps} 
+
+`verbatim`
+:::
+::::::::::::::
+
+## Latex can be used for equations
+
+Here is an example. Show the Euler identity:
+
+\[ e^{i\pi} = -1  \]
+
+
+Begin by Taylor expanding $e^{i\theta}$:
+
+\[e^{i\theta} = 1 + i\theta + (i\theta)^2/2 + (i\theta)^3/3! +  (i\theta)^4/4! + ...\]
+
+Notice that the odd and even terms are just the taylor expansion of $\cos$ and $\sin$:
+
+\[e^{i\theta} = 1 - \theta^2/2 + \theta^4/4! +  i(\theta - \theta^3/3!) + ... \]
+
+\[ e^{i\theta} = \cos(\theta) +  i\sin(\theta) \]
+
+## Plots and legends are easily embedded with text
+
+### Diamonds dataset
+
+The price of a diamond increases super-linearly with the carat of the diamond. 
+
+```{r caption = "Canonical diamonds data visualization", fig.width=8, fig.height=4}
+ggplot(diamonds) + 
+  geom_point(aes(x = carat, y = price, color = color, shape = cut))
+```
+
+## How to show a table
+
+Tables are shown using `knitr::kable`. 
+```{r}
+diamonds %>%
+head() %>%
+knitr::kable()
+```
+
+## 1-column plots or tables
+
+```{r}
+# Don't include anything except for the code block
+diamonds %>%
+head() %>%
+knitr::kable()
+```
+
+
+# Discussion & Conclusions
+
+- Talks are an effective method of scientific communication
+- Creating talks takes a long time
+- Powerpoints can be quickly created through integration with Rstudio / Rmarkdown can 

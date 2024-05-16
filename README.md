@@ -5,6 +5,10 @@ You can render PowerPoint presentations from R Markdown documents. This capabili
 
 ![](ppt-rmd.png)
 
+# BillionToOne Template
+
+See: [bto_powerpoint.Rmd](./bto_powerpoint.Rmd)
+
 ### Features
 
 You can generate most elements supported by Pandoc’s Markdown with the PowerPoint output including: Inline formatting, lists, LaTeX math expressions/equations, hyperlinks, block quotations,ß and more. PowerPoint output also supports these nice features:
